@@ -1,5 +1,6 @@
 import { Route, Navigate } from "react-router";
 import { useLocation } from 'react-router'
+import Weather from './Weather'
 
 const Home = () => {
 
@@ -12,6 +13,7 @@ const Home = () => {
     return (
         <div>
             <p>render Home</p>
+            <Weather />
         </div>
     )
 }
