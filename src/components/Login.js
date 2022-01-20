@@ -21,16 +21,13 @@ const Login = () => {
 
         axios.post(`${axios.defaults.baseURL}/users/login`, userData)
             .then((data)=>{
-                console.log('success')
-                const { headers }=data
-
-                navigate('/home',{  
-                    state: {headers}
-                })
-
-                sessionStorage.setItem('headers', JSON.stringify(data))
-
-                console.log(data.data)
+                let userData = data.data.user
+                let token = data.data.token
+                navigate('/home')
+                
+                sessionStorage.setItem('token', JSON.stringify(token))
+                sessionStorage.setItem('userData', JSON.stringify(userData))
+                userData.is_admin?navigate('/admin'):navigate('/home')
             })
 
             .catch((error) => console.log(error))

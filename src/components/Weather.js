@@ -3,23 +3,13 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
-const Weather = () => {
+const Weather = ({pos}) => {
 
     // const [latitude, setLatitude] = useState()
     // const [longitude, setLongitude] = useState()
-    const [pos, setPos] = useState({longitude:'',latitude:''})
     const [loc, setLoc] = useState()
 
-    useEffect(() => {
-        
-        if('geolocation' in navigator){ 
-            navigator.geolocation.getCurrentPosition(position =>{
-                setPos({longitude: position.coords.longitude.toString(), latitude: position.coords.latitude.toString()})
-                // setLatitude(position.coords.latitude.toString())
-                // setLongitude(position.coords.longitude.toString())
-            })
-        }   
-    }, [])
+    
 
 
     const { data, isLoading, errorMessage } = useOpenWeather({

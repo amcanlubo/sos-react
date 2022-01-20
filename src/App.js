@@ -1,6 +1,8 @@
 import './App.css';
 import Home from './components/Home';
 import Login from './components/Login';
+import Settings from './components/Settings';
+import Admin from './components/Admin';
 import React from 'react';
 
 import {
@@ -21,6 +23,8 @@ function App() {
     <Routes>
       <Route exact path="/" element={<Login />}/>
       <Route exact path="/home" element={<Home />}/>
+      <Route exact path="/settings" element={<Settings />}/>
+      <Route exact path="/admin" element={<Admin />}/>
     </Routes>
   );
 }
