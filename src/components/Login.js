@@ -35,7 +35,7 @@ const Login = () => {
 
     return (
 
-        <form onSubmit={(e)=>{ handleLogin(e) }}>
+        <form onSubmit={handleLogin}>
             <label htmlFor="email">email</label>
             <input type="email" ref={userEmail}/>
             <label htmlFor="password">password</label>

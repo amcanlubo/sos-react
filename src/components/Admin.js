@@ -27,13 +27,27 @@ const Admin = () => {
 
     }
 
-    useEffect(() => {
+    const displayEmergencies = () => {
         axios.get(`${axios.defaults.baseURL}/people_in_emergency`, headers)
         .then((response)=>{
             setEmergencies(response.data)
         });
+    }
+
+    useEffect(() => {
+        displayEmergencies()
     }, []);
+
     
+    
+    const emergencyResponded = (id) => {
+        axios.patch(`${axios.defaults.baseURL}/toggle_emergency`,{
+            "id":id
+        }, headers)
+         .then((response)=>{
+             displayEmergencies()
+         })
+    }
     
   return (
       <>
@@ -43,6 +57,7 @@ const Admin = () => {
                     <div>{emergency.emergency_type}</div>
                     <div>{emergency.first_name}</div>
                     <div>{emergency.last_name}</div>
+                    <button onClick={()=>{emergencyResponded(emergency.id)}}>button</button>
                 </div>
             )
         })}
