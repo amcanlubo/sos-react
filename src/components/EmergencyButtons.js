@@ -11,7 +11,7 @@ const EmergencyButtons = ({pos, headers}) => {
         console.log(headers)
         axios.post(`${axios.defaults.baseURL}/emergency`, data, headers)
             .then((response)=>{
-                console.log(response)
+                console.log(response.config.data)
             })
     }
     
