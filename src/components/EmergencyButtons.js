@@ -19,8 +19,8 @@ const EmergencyButtons = ({pos, headers}) => {
         <div className="buttons">
             <button onClick={()=>{Emergency('Police')}}>Police</button>
             <button onClick={()=>{Emergency('Medic')}}>Medic</button>
-            <button onClick={()=>{Emergency('Fire Dept.')}}>Fire Dept.</button>
-            <button onClick={()=>{Emergency('Natural Disaster')}}>Natural Disaster</button>
+            <button onClick={()=>{Emergency('Fire')}}>Fire Dept.</button>
+            <button onClick={()=>{Emergency('Nat Disaster')}}>Natural Disaster</button>
         </div>
     )
 }

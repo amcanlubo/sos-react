@@ -8,10 +8,12 @@ const Admin = () => {
     let navigate = useNavigate()
     
   return (
-      <>
-        <Emergencies />
-        <button onClick={()=>{logout(navigate)}}>Logout</button>
-      </>
+      <div className="bg-gray-800">
+        <div className="container">
+          <Emergencies /> 
+          <button onClick={()=>{logout(navigate)}}>Logout</button>
+        </div>
+      </div>
   );
 };
 

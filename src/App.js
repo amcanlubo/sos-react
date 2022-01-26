@@ -22,19 +22,20 @@ import axios from 'axios';
 
 function App() {
 
+  // axios.defaults.baseURL = "https://acsc-sos.herokuapp.com/api"
   axios.defaults.baseURL = "http://localhost:3000/api"
 
   return (
-    <Routes>
-      <Route exact path="/" element={<Login />}/>
-      <Route exact path="/home" element={<Home />}/>
-      <Route exact path="/settings" element={<Settings />}/>
-      <Route exact path="/admin" element={<Admin />}/>
-      <Route exact path="/archive" element={<Archive />}/>
-      <Route exact path="/users" element={<Users />}/>
-      <Route exact path="/register" element={<Register />}/>
-      <Route exact path="/admin/register" element={<AdminRegister />}/>
-    </Routes>
+      <Routes>
+        <Route exact path="/" element={<Login />}/>
+        <Route exact path="/home" element={<Home />}/>
+        <Route exact path="/settings" element={<Settings />}/>
+        <Route exact path="/admin" element={<Admin />}/>
+        <Route exact path="/archive" element={<Archive />}/>
+        <Route exact path="/users" element={<Users />}/>
+        <Route exact path="/register" element={<Register />}/>
+        <Route exact path="/admin/register" element={<AdminRegister />}/>
+      </Routes>
   );
 }
 

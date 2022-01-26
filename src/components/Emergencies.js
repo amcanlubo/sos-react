@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toggle } from '../utils/toggle';
 import EmergencyShow from './EmergencyShow';
 import { ActionCableConsumer } from 'react-actioncable-provider';
+import { getTime, getDate } from '../utils/date';
 
 const Emergencies = () => {
 
@@ -53,6 +54,8 @@ const Emergencies = () => {
              displayEmergencies()
          })
     }
+
+    
     
   return (
       <>
@@ -60,14 +63,24 @@ const Emergencies = () => {
           channel={'EmergenciesChannel'}
           onReceived={ handleReceivedEmergency }
         />
-        
+        <div className="mb-4 sticky top-0 grid grid-cols-4 text-center p-2 bg-gray-800/90 font-bold text-lg text-white">
+            <span>Name</span>
+            <div>Emergency Type</div>
+            <div>Date & Time</div>
+            <div>Action Taken</div>
+        </div>
         {emergencies.map((emergency)=>{
             return(
-                <div className="flex" onClick={()=>{emergencyToggle(showToggle,setShowToggle, emergency)}}>
-                    <div>{emergency.emergency_type}</div>
-                    <div>{emergency.first_name}</div>
-                    <div>{emergency.last_name}</div>
-                    <button onClick={()=>{emergencyResponded(emergency.id)}}>button</button>
+                <div className="card" onClick={()=>{emergencyToggle(showToggle,setShowToggle, emergency)}}>
+                    <span>
+                        {emergency.first_name} {emergency.last_name}
+                    </span>
+                    <div className="grow-0">{emergency.emergency_type}</div>
+                    <div className="flex flex-col items-center">
+                        <p>{getDate(emergency.created_at)}</p>
+                        <p>{getTime(emergency.created_at)}</p>
+                    </div>
+                    <button className="transition ease-in-out delay-150 hover:scale-110 bg-gray-800 p-2 rounded-md hover:bg-gray-900 hover:text-lime-400" onClick={()=>{emergencyResponded(emergency.id)}}>Responded</button>
                 </div>
             )
         })}
