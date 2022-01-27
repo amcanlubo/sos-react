@@ -35,20 +35,46 @@ const AdminRegister = () => {
     
 
     return (
-        <div>
-            <form onSubmit={handleSignup}>
-            <label htmlFor="email">email</label>
-            <input type="email" ref={email}/>
-            <label htmlFor="first_name">first name</label>
-            <input type="text" ref={first_name}/>
-            <label htmlFor="last_name">last name</label>
-            <input type="text" ref={last_name}/>
-            <label htmlFor="mobile_number">mobile number</label>
-            <input type="number" ref={mobile_number}/>
-            <label htmlFor="password">password</label>
-            <input type="password" ref={password}/>
-            <button type="submit">button</button>
-        </form>
+        <div className="flex justify-center items-center h-screen bg-gray-800">
+            <div className="max-w-md w-full bg-gray-900 rounded p-6 space-y-4 rounded-md mx-4">      
+                <form onSubmit={handleSignup}>
+                    
+                    <div className="mb-4">
+                        <p className="text-gray-400">Create an Account</p>
+                        <h2 className="text-xl font-bold text-white">Are you an admin?</h2>
+                    </div>
+
+                    <div className="mb-4">
+                        <label htmlFor="email" className="text-gray-400">email</label>
+                        <input type="email" ref={email} className="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" placeholder="Email"/>
+                    </div>
+
+                    <div className="mb-4">
+                        <label htmlFor="first_name" className="text-gray-400">first name</label>
+                        <input type="text" ref={first_name} className="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" placeholder="First Name"/>   
+                    </div>
+
+                    <div className="mb-4">
+                        <label htmlFor="last_name" className="text-gray-400">last name</label>
+                        <input type="text" ref={last_name} className="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" placeholder="Last Name"/>     
+                    </div>
+
+                    <div className="mb-4">
+                        <label htmlFor="mobile_number" className="text-gray-400">mobile number</label>
+                        <input type="number" ref={mobile_number} className="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" placeholder="Mobile Number"/>   
+                    </div>
+
+                    <div className="mb-4">
+                        <label htmlFor="password" className="text-gray-400">password</label>
+                        <input type="password" ref={password} className="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" placeholder="Password"/>
+                    </div>
+
+                    <div className="mb-4">
+                        <button type="submit" className="w-full py-4 bg-blue-600 hover:bg-blue-700 rounded text-sm font-bold text-gray-50 transition duration-200">Sign up this account</button>
+                    </div>
+                    
+                </form>
+            </div>
         </div>
     );
 };

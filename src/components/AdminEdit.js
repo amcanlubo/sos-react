@@ -53,18 +53,27 @@ const AdminEdit = ({isEditing, user, showUsers, setIsEditing, setShow}) => {
 
         const editModal = () => {
             return(
-                <div className="editModal">
-                    <form onSubmit={(e)=>{handleEdit(e)}}>
-                    <label>first name</label>
-                    <input ref={first_name} defaultValue={user.first_name} ></input><br/>
-                    <label>last name</label>
-                    <input ref={last_name} defaultValue={user.last_name}></input><br/>
-                    <label>mobile number</label>
-                    <input ref={mobile_number} defaultValue={user.mobile_number}></input><br/>
-                    <label>email</label>
-                    <input ref={email} defaultValue={user.email}></input><br/>
-                    <button type="submit">submit</button>
-                    </form>
+                <div className="flex justify-center items-center h-screen bg-gray-800 editModal">
+                    <div className="max-w-md w-full bg-gray-900 rounded p-6 space-y-4 rounded-md mx-4">
+                        {/* <div className="editModal"> */}
+                            <form onSubmit={(e)=>{handleEdit(e)}}>
+
+                                <div className="mb-4">
+                                    <p className="text-gray-400">Edit user details</p>
+                                </div>
+
+                                <label>first name</label>
+                                <input ref={first_name} defaultValue={user.first_name} ></input><br/>
+                                <label>last name</label>
+                                <input ref={last_name} defaultValue={user.last_name}></input><br/>
+                                <label>mobile number</label>
+                                <input ref={mobile_number} defaultValue={user.mobile_number}></input><br/>
+                                <label>email</label>
+                                <input ref={email} defaultValue={user.email}></input><br/>
+                                <button type="submit">submit</button>
+                            </form>
+                        {/* </div> */}
+                    </div>
                 </div>
             )
         }
