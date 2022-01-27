@@ -16,7 +16,7 @@ const EmergencyShow = ({emergencyData, showToggle, setShowToggle}) => {
         
 
         return(
-        <div onClick={()=>{toggle(showToggle,setShowToggle)}} className="fixed w-screen h-screen bg-gray-900/75 flex justify-center items-center top-0">
+        <div className="fixed w-screen h-screen bg-gray-900/75 flex justify-center items-center top-0">
             <div className="bg-white flex flex-col w-full rounded-md h-4/5 md:w-4/5 mx-2 p-2">
                 <button className="self-end px-2 hover:text-red-700" onClick={()=>{toggle(showToggle,setShowToggle)}}>x</button>
                 <div className="relative w-full h-4/5">
