@@ -2,6 +2,7 @@ import React, {useState,useEffect} from 'react';
 import axios from 'axios';
 import AdminEdit from './AdminEdit';
 import AdminShow from './AdminShow';
+import AppName from './AppName';
 import { toggle } from '../utils/toggle';
 
 const Users = () => {
@@ -54,20 +55,24 @@ const Users = () => {
     
 
   return (
-    <div>
-        {users.map((user)=>{
-            return(
-                <div>
-                <div>{user.first_name}</div>
-                <button onClick={()=>{userToggle(isEditing,setIsEditing,user)}}>edit profile</button>
-                <button onClick={()=>{userToggle(show,setShow,user)}}>show</button>
-                <button onClick={()=>{deleteUser(user.id)}}>delete</button>
-                </div>
-            )
-        })}
-        <AdminEdit isEditing={isEditing} user={user} showUsers={showUsers} setIsEditing={setIsEditing} setShow={setShow}/>
-        <AdminShow show={show} user={user} setShow={setShow}/>
+    <>
+    <div className="bg-gradient-to-r from-gray-800/90 to-blue-900/90 min-h-screen">
+        <AppName/>
+        <div className="container">
+            {users.map((user)=>{
+                return(
+                    <div onClick={()=>{userToggle(show,setShow,user)}} className="card-users-mobile">
+                        <div>{user.first_name} {user.last_name}</div>
+                        
+                    </div>
+                )
+            })}
+        </div>
     </div>
+    <AdminEdit isEditing={isEditing} user={user} showUsers={showUsers} setIsEditing={setIsEditing} setShow={setShow}/>
+    <AdminShow userToggle={userToggle} deleteUser={deleteUser} show={show} user={user} setShow={setShow} isEditing={isEditing} setIsEditing={setIsEditing}/>
+    </>
+    
     );
 };
 

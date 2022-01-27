@@ -4,7 +4,6 @@ import { toggle } from '../utils/toggle';
 import EmergencyShow from './EmergencyShow';
 import { ActionCableConsumer } from 'react-actioncable-provider';
 import { getTime, getDate } from '../utils/date';
-import AppName from './AppName';
 
 const Emergencies = ({archiveMode}) => {
 
@@ -31,9 +30,7 @@ const Emergencies = ({archiveMode}) => {
     }
 
     const displayEmergencies = () => {
-        let url = ``
-        archiveMode?url=`/all_emergencies`:url=`/people_in_emergency`;
-        axios.get(`${axios.defaults.baseURL}/${url}`, headers)
+        axios.get(`${axios.defaults.baseURL}/people_in_emergency`, headers)
         .then((response)=>{
             setEmergencies(response.data)
         });
@@ -57,12 +54,11 @@ const Emergencies = ({archiveMode}) => {
     
   return (
       <>
-        <AppName/>
         {cable || setCable(<ActionCableConsumer 
           channel={'EmergenciesChannel'}
           onReceived={ displayEmergencies }
         />)}
-        <div className="mb-4 sticky top-0 grid grid-cols-4 text-center p-2 bg-gray-800/90 font-medium text-lg text-white">
+        <div className="mb-4 sticky top-0 grid grid-cols-4 text-center p-2 bg-gradient-to-r from-gray-800/90 to-blue-900/90 font-medium text-lg text-white">
             <span>Name</span>
             <div>Emergency Type</div>
             <div>Date & Time</div>

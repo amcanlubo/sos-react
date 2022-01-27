@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { Navigate } from 'react-router'
+import { toggle } from '../utils/toggle';
 
 const AdminEdit = ({isEditing, user, showUsers, setIsEditing, setShow}) => {
     const first_name = useRef()
@@ -53,26 +54,33 @@ const AdminEdit = ({isEditing, user, showUsers, setIsEditing, setShow}) => {
 
         const editModal = () => {
             return(
-                <div className="flex justify-center items-center h-screen bg-gray-800 editModal">
-                    <div className="max-w-md w-full bg-gray-900 rounded p-6 space-y-4 rounded-md mx-4">
-                        {/* <div className="editModal"> */}
-                            <form onSubmit={(e)=>{handleEdit(e)}}>
-
-                                <div className="mb-4">
-                                    <p className="text-gray-400">Edit user details</p>
-                                </div>
-
-                                <label>first name</label>
-                                <input ref={first_name} defaultValue={user.first_name} ></input><br/>
-                                <label>last name</label>
-                                <input ref={last_name} defaultValue={user.last_name}></input><br/>
-                                <label>mobile number</label>
-                                <input ref={mobile_number} defaultValue={user.mobile_number}></input><br/>
-                                <label>email</label>
-                                <input ref={email} defaultValue={user.email}></input><br/>
-                                <button type="submit">submit</button>
-                            </form>
-                        {/* </div> */}
+                <div className="fixed w-screen h-screen bg-gray-900/75 flex justify-center items-center top-0">
+                    <div className="bg-white flex flex-col w-full rounded-md  md:w-4/5 mx-2 p-6">
+                        <button className="self-end px-2 fas fa-times-circle hover:text-red-500" onClick={()=>{toggle(isEditing,setIsEditing)}}></button>
+                        <form onSubmit={(e)=>{handleEdit(e)}}>
+                            <div className="mb-4">
+                                <p className="text-2xl font-bold">EDIT USER DETAILS</p>
+                            </div>
+                            <div className="mb-4">
+                            <label>first name</label>
+                            <input className="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" ref={first_name} defaultValue={user.first_name} ></input>
+                            </div>
+                            <div className="mb-4">
+                            <label>last name</label>
+                            <input className="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" ref={last_name} defaultValue={user.last_name}></input>
+                            </div>
+                            <div className="mb-4">
+                            <label>mobile number</label>
+                            <input className="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" ref={mobile_number} defaultValue={user.mobile_number}></input>
+                            </div>
+                            <div className="mb-4">
+                            <label>email</label>
+                            <input className="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" ref={email} defaultValue={user.email}></input>
+                            </div>
+                            <div className="mb-4 mt-8">
+                                <button type="submit" className="w-full py-4 bg-blue-600 hover:bg-blue-700 rounded-md text-sm font-bold text-gray-50 transition duration-200">Submit</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             )
