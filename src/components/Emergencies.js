@@ -4,6 +4,7 @@ import { toggle } from '../utils/toggle';
 import EmergencyShow from './EmergencyShow';
 import { ActionCableConsumer } from 'react-actioncable-provider';
 import { getTime, getDate } from '../utils/date';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Emergencies = ({archiveMode}) => {
 
@@ -47,6 +48,15 @@ const Emergencies = ({archiveMode}) => {
         }, headers)
          .then((response)=>{
              displayEmergencies()
+             toast.success('Responded Successfully!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
          })
     }
 
@@ -54,6 +64,7 @@ const Emergencies = ({archiveMode}) => {
     
   return (
       <>
+        
         {cable || setCable(<ActionCableConsumer 
           channel={'EmergenciesChannel'}
           onReceived={ displayEmergencies }
@@ -62,11 +73,11 @@ const Emergencies = ({archiveMode}) => {
             <span>Name</span>
             <div>Emergency Type</div>
             <div>Date & Time</div>
-            <div>Action Taken</div>
+            <div>Action</div>
         </div>
         {emergencies.map((emergency)=>{
             return(
-                <div className="card" onClick={()=>{emergencyToggle(showToggle,setShowToggle, emergency)}}>
+                <div className="card">
                     <span>
                         {emergency.first_name} {emergency.last_name}
                     </span>
@@ -75,13 +86,15 @@ const Emergencies = ({archiveMode}) => {
                         <p>{getDate(emergency.created_at)}</p>
                         <p>{getTime(emergency.created_at)}</p>
                     </div>
-                    <button className="transition ease-in-out delay-150 hover:scale-110 bg-gray-800 p-2 rounded-md hover:bg-gray-900 hover:text-lime-400" onClick={()=>{emergencyResponded(emergency.id)}}>Responded</button>
+                    <div>
+                        <button className="fas text-lg p-2 fa-info-circle hover:text-yellow-500"  onClick={()=>{emergencyToggle(showToggle,setShowToggle, emergency)}}></button>
+                        <button className="fas text-lg p-2 fa-check-circle hover:text-green-500" onClick={()=>{emergencyResponded(emergency.id)}}></button>
+                    </div>
                 </div>
             )
         })}
         
         <EmergencyShow showToggle={showToggle} setShowToggle={setShowToggle} emergencyData={toggleEmergency}/>
-       
       </>
   );
 };

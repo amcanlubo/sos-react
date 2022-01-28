@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react'
-import EditModal from './EditModal'
+import EditModal from './Edit'
 import { useNavigate } from 'react-router'
 import {toggle} from '../utils/toggle'
 import { logout } from '../utils/logout'
@@ -15,8 +15,6 @@ const Settings = () => {
 
     return (
         <>
-            <button onClick={()=>{toggle(isEditing,setIsEditing)}}>edit profile</button>
-            <button onClick={()=>{logout(navigate)}}>Logout</button>
             <EditModal isEditing={isEditing}/>
         </>
     )

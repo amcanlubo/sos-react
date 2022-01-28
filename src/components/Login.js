@@ -1,13 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 import {useNavigate} from 'react-router'
 import {useRef} from 'react'
+import AppName from './AppName'
 
 const Login = () => {
 
     let navigate = useNavigate()
     let userEmail = useRef(null)
     let userPassword = useRef(null)
+
+    useEffect(() => {
+        if(sessionStorage.getItem('userData') && JSON.parse(sessionStorage.getItem('userData')).is_admin===true){
+            navigate('/admin')
+        }
+        else if(sessionStorage.getItem('userData') && JSON.parse(sessionStorage.getItem('userData')).is_admin===false){
+            navigate('/home')
+        }
+    }, []);
+
+    
 
     const handleLogin = (e) => {
         e.preventDefault()
@@ -34,8 +46,9 @@ const Login = () => {
     }
 
     return (
-        <div className="flex justify-center items-center h-screen bg-gray-800">
-            <div className="max-w-md w-full bg-gray-900 rounded p-6 space-y-4 rounded-md mx-4">
+        <div className="flex flex-col justify-center items-center h-screen bg-gray-800">
+            <div className="pb-6"><AppName/></div>
+            <div className="max-w-md w-11/12 bg-gray-900 rounded p-6 rounded-md">
                 <form onSubmit={handleLogin}>
                     <div className="mb-4">
                         <p className="text-gray-400">Sign In</p>
@@ -58,11 +71,7 @@ const Login = () => {
 
                 <div className="flex items-center justify-between">
                     <div className="flex flex-row items-center">
-                        <input type="checkbox" className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"/>
-                        <label for="comments" className="ml-2 text-sm font-normal text-gray-400">Remember me</label>
-                    </div>
-                    <div>
-                        <a className="text-sm text-blue-600 hover:underline" href="#">Forgot password?</a>
+                        <p className="ml-2 text-sm font-normal text-gray-400">Don't have an account? <a className="text-blue-600 hover:underline" href="/register">Sign Up</a></p>
                     </div>
                 </div>
             </div>

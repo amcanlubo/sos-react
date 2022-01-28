@@ -2,9 +2,13 @@ import Weather from './Weather'
 import News from "./News";
 import EmergencyButtons from "./EmergencyButtons";
 import { useState, useEffect } from "react";
+import AppName from './AppName'
+import Navbar from './Navbar';
+import { useNavigate } from 'react-router';
 
 const Home = () => {
 
+    const navigate = useNavigate()
     const [pos, setPos] = useState({})
 
     useEffect(() => {
@@ -18,22 +22,27 @@ const Home = () => {
         }   
     }, [])
 
+    let userData  = sessionStorage.getItem('userData')
     let token = sessionStorage.getItem('token')
     let headers = { headers: {
         "Authorization": `Token ${token}`,
         "X-Requested-With": "XMLHttpRequest"
     }}
-    // if(!userData){
-    //     return <Navigate to="/" />
-    // }
+    if(!userData){
+        navigate('/')
+    }
 
     return (
-        <div>
-            <p>render Home</p>
-            <a href="/settings">settings</a>
-            <Weather pos={pos}/>
-            <EmergencyButtons pos={pos} headers={headers}/>
-            <News />
+        <div className="flex flex-col bg-gradient-to-r from-gray-800 to-blue-900 min-h-screen text-white">
+                <div className="container px-4">
+                    <Navbar/>
+                    <AppName/>
+                    <div>
+                        <Weather pos={pos}/>
+                    </div>
+                    <EmergencyButtons pos={pos} headers={headers}/>
+                    <News />
+            </div>
         </div>
     )
 }

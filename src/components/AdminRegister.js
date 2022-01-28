@@ -1,6 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect    } from 'react';
 import axios from 'axios';
 import { defaults } from 'autoprefixer';
+import { useNavigate } from 'react-router';
+import Navbar from './Navbar';
 
 const AdminRegister = () => {
 
@@ -9,8 +11,16 @@ const AdminRegister = () => {
     let last_name = useRef(null)
     let mobile_number = useRef(null)
     let password = useRef(null)
-
+    const navigate = useNavigate()
     
+
+    useEffect(() => {
+        let userData  = sessionStorage.getItem('userData')
+        if(!userData || JSON.parse(userData).is_admin === false){
+          navigate('/')
+        }
+    }, []);
+
 
     const handleSignup = (e) => {
 
@@ -35,13 +45,15 @@ const AdminRegister = () => {
     
 
     return (
-        <div className="flex justify-center items-center h-screen bg-gray-800">
+        <div className="flex flex-col contianer justify-center p-2 items-center h-screen bg-gray-800">
+            <div className="absolute top-0 w-full">
+            <Navbar/>
+            </div>
             <div className="max-w-md w-full bg-gray-900 rounded p-6 space-y-4 rounded-md mx-4">      
                 <form onSubmit={handleSignup}>
                     
                     <div className="mb-4">
                         <p className="text-gray-400">Create an Account</p>
-                        <h2 className="text-xl font-bold text-white">Are you an admin?</h2>
                     </div>
 
                     <div className="mb-4">

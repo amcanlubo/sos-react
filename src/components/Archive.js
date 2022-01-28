@@ -3,19 +3,23 @@ import axios from 'axios';
 import { toggle } from '../utils/toggle';
 import { getTime, getDate } from '../utils/date';
 import EmergencyShow from './EmergencyShow';
+import { useNavigate } from 'react-router';
 
 const Archive = () => {
 
     const [emergencies,setEmergencies] = useState([])
     const [showToggle,setShowToggle] = useState(false)
     const [toggleEmergency, setToggleEmergency] = useState()
-    const [cable,setCable] = useState()
-    
-    
-    if (JSON.parse(sessionStorage.getItem('userData'))){
-        var userData = JSON.parse(sessionStorage.getItem('userData'))
-        var token = JSON.parse(sessionStorage.getItem('token'))
-    }
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        let userData  = sessionStorage.getItem('userData')
+        if(!userData || JSON.parse(userData).is_admin === false){
+          navigate('/')
+        }
+    }, []);
+
+    var token = JSON.parse(sessionStorage.getItem('token'))
 
     let headers = { headers: {
         "Authorization":   `Token ${token}`,

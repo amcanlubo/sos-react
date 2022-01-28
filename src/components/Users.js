@@ -4,6 +4,9 @@ import AdminEdit from './AdminEdit';
 import AdminShow from './AdminShow';
 import AppName from './AppName';
 import { toggle } from '../utils/toggle';
+import Navbar from './Navbar';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router';
 
 const Users = () => {
 
@@ -12,7 +15,14 @@ const Users = () => {
     const [show, setShow] = useState(false)
 
     const [user, setUser] = useState()
+    const navigate = useNavigate()
 
+    useEffect(() => {
+        let userData  = sessionStorage.getItem('userData')
+        if(!userData || JSON.parse(userData).is_admin === false){
+          navigate('/')
+        }
+      }, []);
 
     if (JSON.parse(sessionStorage.getItem('userData'))){
         var userData = JSON.parse(sessionStorage.getItem('userData'))
@@ -44,7 +54,16 @@ const Users = () => {
     const deleteUser = (id) => {
         axios.delete(`${axios.defaults.baseURL}/delete/${id}`, headers)
             .then((response)=>{
-                console.log(response)
+                toast.success('Account Deleted', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
+                setShow(false)
                 showUsers()
             })
     }
@@ -56,7 +75,8 @@ const Users = () => {
 
   return (
     <>
-    <div className="bg-gradient-to-r from-gray-800/90 to-blue-900/90 min-h-screen">
+    <div className="bg-gradient-to-r from-gray-800 to-blue-900 min-h-screen">
+        <Navbar/>
         <AppName/>
         <div className="container">
             {users.map((user)=>{
@@ -69,7 +89,7 @@ const Users = () => {
             })}
         </div>
     </div>
-    <AdminEdit isEditing={isEditing} user={user} showUsers={showUsers} setIsEditing={setIsEditing} setShow={setShow}/>
+    <AdminEdit isEditing={isEditing} user={user} showUsers={showUsers} setIsEditing={setIsEditing} setShow={setShow} show={show}/>
     <AdminShow userToggle={userToggle} deleteUser={deleteUser} show={show} user={user} setShow={setShow} isEditing={isEditing} setIsEditing={setIsEditing}/>
     </>
     

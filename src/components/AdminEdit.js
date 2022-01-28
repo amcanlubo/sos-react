@@ -2,8 +2,10 @@ import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { Navigate } from 'react-router'
 import { toggle } from '../utils/toggle';
+import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 
-const AdminEdit = ({isEditing, user, showUsers, setIsEditing, setShow}) => {
+const AdminEdit = ({isEditing, user, showUsers, setIsEditing}) => {
     const first_name = useRef()
     const last_name = useRef()
     const mobile_number = useRef()
@@ -13,13 +15,9 @@ const AdminEdit = ({isEditing, user, showUsers, setIsEditing, setShow}) => {
     let isSuccess = false
 
     
-    if (JSON.parse(sessionStorage.getItem('userData'))){
-        var userData = JSON.parse(sessionStorage.getItem('userData'))
-        var token = JSON.parse(sessionStorage.getItem('token'))
-    }
-    else{
-        Navigate('/')
-    }
+    var token = JSON.parse(sessionStorage.getItem('token'))
+
+    
 
     let headers = { headers: {
         "Authorization": `Token ${token}`,
@@ -40,10 +38,17 @@ const AdminEdit = ({isEditing, user, showUsers, setIsEditing, setShow}) => {
         if(isSuccess){
             axios.patch(`${axios.defaults.baseURL}/admin`, {"user": data, "id": user.id}, headers)
                 .then((response)=>{
-                    console.log(response)
+                    toast.success('Account Updated', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     showUsers()
                     setIsEditing(false)
-                    setShow(true)
                 })
 
                 .catch((error)=>{
