@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/sos-app/static/css/main.365cec02.css",
+    "main.js": "/sos-app/static/js/main.aa2151d4.js",
+    "static/js/787.aa811d77.chunk.js": "/sos-app/static/js/787.aa811d77.chunk.js",
+    "static/media/profileVector.svg": "/sos-app/static/media/profileVector.88d3a27a75e1f0d0fbad9b4a30a7536c.svg",
+    "index.html": "/sos-app/index.html",
+    "static/media/index.cjs": "/sos-app/static/media/index.06ad11ea3e32fd3e4303.cjs",
+    "main.365cec02.css.map": "/sos-app/static/css/main.365cec02.css.map",
+    "main.aa2151d4.js.map": "/sos-app/static/js/main.aa2151d4.js.map",
+    "787.aa811d77.chunk.js.map": "/sos-app/static/js/787.aa811d77.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.365cec02.css",
+    "static/js/main.aa2151d4.js"
+  ]
+}
